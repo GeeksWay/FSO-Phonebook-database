@@ -15,11 +15,7 @@ app.use(express.static('dist'));
 app.use(morgan('tiny'));
 
 // MongoDB connection
-mongoose.connect(url, {
-  //useNewUrlParser: true,  // Remove this line, as it's deprecated
-  //useUnifiedTopology: true, // Remove this line, as it's deprecated
-  useUnifiedTopology: true,  // Add this line to handle deprecation warning
-})
+mongoose.connect(url)
 .then(() => {
   console.log('Connected to MongoDB');
 })
