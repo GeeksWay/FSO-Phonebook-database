@@ -1,5 +1,6 @@
 # FSO-Phonebook-database
-    Link to the deployed Phonebook-backend application - https://fso-phonebook-database.onrender.com/
+Link to the deployed Phonebook-backend application - https://fso-phonebook-database.onrender.com/
+https://fso-phonebook-database.onrender.com
     
 
 # Features
