@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-require('dotenv').config(); // Ensure this is at the top
+require('dotenv').config();
 const cors = require('cors');
 
 const app = express();
@@ -15,19 +15,10 @@ app.use(express.static('dist'));
 app.use(morgan('tiny'));
 
 // MongoDB connection
-/*
-(async () => {
-  try {
-    await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
-    console.log('Connected to MongoDB');
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error.message);
-  }
-})();
-*/
 mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  //useNewUrlParser: true,  // Remove this line, as it's deprecated
+  //useUnifiedTopology: true, // Remove this line, as it's deprecated
+  useCreateIndex: true,  // Add this line to handle deprecation warning
 })
 .then(() => {
   console.log('Connected to MongoDB');
@@ -35,6 +26,7 @@ mongoose.connect(url, {
 .catch(error => {
   console.error('Error connecting to MongoDB:', error.message);
 });
+
 // Schema and Model for Person
 const personSchema = new mongoose.Schema({
   name: {
@@ -47,7 +39,8 @@ const personSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (value) => {
-        return /^\d{2,3}-\d{5,}$/.test(value); // Check if the number matches the pattern
+        // Check if the number matches the pattern of having 2 or 3 digits, a hyphen, and then at least 5 digits
+        return /^\d{2,3}-\d{5,}$/.test(value);
       },
       message: props => `${props.value} is not a valid phone number! e.g., 09-1234556 and 040-22334455 are valid phone numbers`,
     }
