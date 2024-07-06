@@ -15,6 +15,7 @@ app.use(express.static('dist'));
 app.use(morgan('tiny'));
 
 // MongoDB connection
+/*
 (async () => {
   try {
     await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -23,7 +24,17 @@ app.use(morgan('tiny'));
     console.error('Error connecting to MongoDB:', error.message);
   }
 })();
-
+*/
+mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Connected to MongoDB');
+})
+.catch(error => {
+  console.error('Error connecting to MongoDB:', error.message);
+});
 // Schema and Model for Person
 const personSchema = new mongoose.Schema({
   name: {
