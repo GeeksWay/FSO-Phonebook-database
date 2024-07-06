@@ -18,7 +18,7 @@ app.use(morgan('tiny'));
 mongoose.connect(url, {
   //useNewUrlParser: true,  // Remove this line, as it's deprecated
   //useUnifiedTopology: true, // Remove this line, as it's deprecated
-  useCreateIndex: true,  // Add this line to handle deprecation warning
+  useUnifiedTopology: true,  // Add this line to handle deprecation warning
 })
 .then(() => {
   console.log('Connected to MongoDB');
